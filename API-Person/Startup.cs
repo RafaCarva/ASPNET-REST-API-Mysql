@@ -34,6 +34,8 @@ namespace API_Person
 
             //Dependency injection
             services.AddScoped<IPersonService, PersonService>();
+           
+
 
         }
 

@@ -65,16 +65,20 @@ namespace API_Person.Services.Implementations
 
             var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
 
-            try
+
+            if (result != null)
             {
-                _context.Entry(result).CurrentValues.SetValues(person.Id);
-                _context.SaveChanges();
+                try
+                {
+                    _context.Entry(result).CurrentValues.SetValues(person);
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return person;
+            return result;
         }
 
         private bool Exist(long? id)
